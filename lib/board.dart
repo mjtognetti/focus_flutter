@@ -8,12 +8,13 @@ class Board extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        color: Colors.blue[700],
         child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      for (var track in this.tracks)
-        Container(
-          width: 300,
-          child: track,
-        ),
-    ]));
+          for (var track in this.tracks)
+            Container(
+              width: 300,
+              child: track,
+            ),
+        ]));
   }
 }
