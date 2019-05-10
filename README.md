@@ -5,7 +5,7 @@ The Focus task manager built using flutter.
 
 ### Install Flutter and Flutter Web
 * Install flutter by following the directions here: https://flutter.dev/docs/get-started/install
-* Clone the repo and `cd focus-flutter`.
+* Clone the repo and `cd focus_flutter`.
 * Install flutter_web by following the directions here: https://github.com/flutter/flutter_web#install-the-flutter_web-build-tools
 * The docs for flutter_web don't indicate that you need to add the flutter sdk's bundld dart sdk to your path - but you do. The sdk is at: `$WHERE_YOU_PUT_FLUTTER/bin/cache/dart-sdk/bin`.
 
