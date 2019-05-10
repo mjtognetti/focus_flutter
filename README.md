@@ -14,3 +14,8 @@ Ultimately, you should have added a `flutter/bin`, a `flutter/.pub-cache/bin`, a
 
 ### Running the app
 From the repo root, `webdev serve --auto restart`. This will build the project and serve it on localhost. You can see the port in the output of the command. This will also watch files for changes and hot-reload.
+
+### VS Code
+Instructions for installing the VS Code plugin can be found here: https://github.com/flutter/flutter_web#visual-studio-code
+
+I recommend setting the `editor.formatOnSave: true` setting if you haven't already.
