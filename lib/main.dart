@@ -2,11 +2,53 @@ import 'package:flutter_web/material.dart';
 
 import 'board.dart';
 import 'track.dart';
+import 'state.dart' as Focus;
 
-void main() => runApp(MyApp());
+void main() {
+  Focus.State state = initState();
+  return runApp(App(state: state));
+}
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+Focus.State initState() => Focus.State(title: "Focus Project", tracks: [
+      Focus.Track(
+        title: "Focus",
+        cards: [
+          Focus.Card(title: "Create new card"),
+        ],
+      ),
+      Focus.Track(
+        title: "Hand",
+        cards: [
+          Focus.Card(title: "Create new track"),
+        ],
+      ),
+      Focus.Track(
+        title: "Deck",
+        cards: [
+          Focus.Card(title: "Clean up styles"),
+          Focus.Card(title: "Fix live reload from VS Code."),
+          Focus.Card(title: "Remove cards"),
+          Focus.Card(title: "Reorder cards"),
+        ],
+      ),
+      Focus.Track(
+        title: "Completed",
+        cards: [
+          Focus.Card(title: "Add state to widgets"),
+          Focus.Card(title: "Fix board horizontal scroll."),
+        ],
+      ),
+      Focus.Track(
+        title: "Discard",
+        cards: [],
+      )
+    ]);
+
+class App extends StatelessWidget {
+  const App({this.state});
+
+  final Focus.State state;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,48 +56,29 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Focus'),
+      home: MyHomePage(state: this.state),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.state}) : super(key: key);
 
-  final String title;
+  final Focus.State state;
 
   @override
   Widget build(BuildContext context) {
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        title: Text(title, style: TextStyle(fontFamily: "Sans-serif")),
+        title:
+            Text(this.state.title, style: TextStyle(fontFamily: "Sans-serif")),
       ),
-      body: Column(
-          // Column is also layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (choose the "Toggle Debug Paint" action
-          // from the Flutter Inspector in Android Studio, or the "Toggle Debug
-          // Paint" command in Visual Studio Code) to see the wireframe for each
-          // widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-                child: Board(tracks: [
-              Track(title: "First List"),
-              Track(title: "Second List")
-            ]))
-          ]),
+      body: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+        Expanded(
+            child: Board(tracks: [
+          for (var track in this.state.tracks) Track(track: track)
+        ]))
+      ]),
     );
   }
 }
